@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+  <head>
+      <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7, IE=9" />
+    <%= stylesheet_link_tag 'application', media: 'all',
+                                           'data-turbolinks-track' => true %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+    <%= csrf_meta_tags %>
+    
+    <!--[if lt IE 9]>
+      <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/r29/html5.min.js">
+      </script>
+    <![endif]-->
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <a href="javascript:this.location = <%root_path%>">
+    
+    <title><%= yield(:title) %> | Welcome</title>
+  </head>
+  <!--Gives current user-->
+    <%current_uri = request.env['PATH_INFO']%>
+<body>
+    <div class="container">
+        <!-- <%=  debug(params) if Rails.env.development? %>-->
+    </div>
+    <header class="navbar navbar-fixed-top navbar-inverse animated fadeInDown">
+    <%if current_uri  == root_path%>
+        <ul class="nav navbar-nav navbar-right animated bounceInUp">
+            <div class="open"> 
+                <button id="flip" type="button" class="btn btn-default btn-lg">
+                    <span class="glyphicon glyphicon-nav" aria-hidden="true"></span>
+                </button>
+            </div>
+        </ul>
+                             
+        <div class="animated bounceInUp"> 
+            <ul class="nav navbar-nav navbar-middle  ">
+                <div class="yo">
+                    <li> <%= link_to(image_tag(image_path('https://cloud.githubusercontent.com/assets/15232817/14834343/0215532a-0bd2-11e6-8d05-c643b6aa47be.png'), 
+                    class:'image-responsive'), root_path, :method => :get) %>
+                    </li>
+                </div>
+            </ul>
+        </div>
+        <ul class="nav navbar-nav navbar-left animated bounceInUp">
+            <li>
+                <div class="logo"> <%= image_tag('https://cloud.githubusercontent.com/assets/15232817/14834373/29182da8-0bd2-11e6-9f95-c117e93ad17a.png', :size => "75x75")%></div>
+                    <span class="hair">Dominican technique hair salon</span>
+            </li>
+        </ul>
+        
+    <%else%>
+    
+        <ul class="nav navbar-nav navbar-right animated fadeInLeftBig">
+            <li>
+                <div class="logo"> <%= image_tag('https://cloud.githubusercontent.com/assets/15232817/14834373/29182da8-0bd2-11e6-9f95-c117e93ad17a.png', :size => "75x75")%></div>
+                    <span class="hair">Dominican technique hair salon</span>
+            </li>
+        </ul>
+        
+        <div class="animated bounceInUp">
+            <ul class="nav navbar-nav navbar-middle">
+                <div class="yo" >
+                    <li><%= link_to(image_tag(image_path('https://cloud.githubusercontent.com/assets/15232817/14834343/0215532a-0bd2-11e6-8d05-c643b6aa47be.png'), 
+                         class: 'image-responsive'), root_path,  :method => :get) %>
+                    </li>
+                </div>
+            </ul>
+        </div>
+        
+        <ul class="nav navbar-nav navbar-left animated bounceInUp">
+            <li> <%= link_to(image_tag(image_path('https://cloud.githubusercontent.com/assets/15232817/14834400/48269392-0bd2-11e6-896e-0896f349d781.png'), 
+                class: 'image-responsive'), choose_path,  :method => :get) %>
+            </li>
+        </ul>
+    <%end%>
+    </header>
+    <div class="container">
+        <div class="center jumbotron4">
+        <% flash.each do |message_type, message| %>
+            <div class="animated shake"> 
+                <%= content_tag(:div, message, class: "alert alert-#{message_type}") %>
+            </div>
+        <% end %>
+        </div>
+        <div class="cb-slideshow">
+            <li><span><div></div></span></li>
+	        <li><span><div></div></span></li>
+		    <li><span><div></div></span></li>
+			<li><span><div></div></span></li>
+			<li><span><div></div></span></li>
+			<li><span><div></div></span></li>
+	    </div>
+     <%= yield %>
+   
+    </div>
+</body>
+</html>

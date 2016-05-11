@@ -1,0 +1,78 @@
+
+
+ <style>
+   h1 { color: #d54d7b; font-family: "Great Vibes", 
+cursive; font-size: 100px; line-height: 160px; font-weight: normal;
+margin-bottom: 0px; margin-top: 40px; text-align: center;
+text-shadow: 0 1px 1px #fff; }
+.names
+{
+    line-height: 30px;
+   color: black;
+ font-size: 30px;
+text-shadow: 0 1px 1px red; 
+}
+ </style>
+ 
+ <% provide(:title, "In line") %>
+
+     <div class="center jumbotron2">
+     
+     <h1 class="animated fadeInDownBig">Customers in line</h1>
+<div class="row animated fadeInUpBig">
+<div class="col-xs-6">
+    
+    <table style="width:100%">
+<%if Customer.exists? == false%>
+    <h1 class="names"><%="No customers signed in"%></h1>
+    <%else%>
+    <tr>
+      <th class="names">Name</th>
+      <th class="names">Last Name</th>
+      <th class="names">Phone</th>
+      <th class="names">Time in</th>
+    </tr>
+    
+    
+    <% @customers.each do |customer| %>
+    
+    <%if customer.lastname.blank?%>
+    
+    <%b="no last name"%>
+    
+    
+    <%else%>
+    
+    
+    
+    <% b = customer.lastname %>
+    
+    
+    <%end%>
+    
+    <% b[0] = b[0].capitalize %>
+    <% n = customer.name %>
+    <% n[0] = n[0].capitalize %>
+    
+    
+    
+  
+      <tr>
+        <td class="names"> <%=n%></td>
+        
+        <td class="names"><%=b%></td>
+        <td class="names"><%= customer.phone %></td>
+        <td class="names"><%= customer.timein %></td>
+        <td class="names"><%= link_to 'sign out', customer, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+       <% end %>
+    <% end %>
+
+    </table>
+<hr/>
+</div>
+</div>
+</div>
+
+
+ 
